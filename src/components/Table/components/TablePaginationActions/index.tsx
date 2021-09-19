@@ -1,4 +1,4 @@
-import { memo } from 'react'
+import { memo, useCallback } from 'react'
 import { useTheme } from '@mui/material/styles'
 
 import { Box, IconButton } from '@mui/material'
@@ -21,29 +21,33 @@ const TablePaginationActions = memo(
   ({ count, page, rowsPerPage, onPageChange }: Props) => {
     const theme = useTheme()
 
-    const handleFirstPageButtonClick = (
-      event: React.MouseEvent<HTMLButtonElement>,
-    ) => {
-      onPageChange(event, 0)
-    }
+    const handleFirstPageButtonClick = useCallback(
+      (event: React.MouseEvent<HTMLButtonElement>) => {
+        onPageChange(event, 0)
+      },
+      [onPageChange],
+    )
 
-    const handleBackButtonClick = (
-      event: React.MouseEvent<HTMLButtonElement>,
-    ) => {
-      onPageChange(event, page - 1)
-    }
+    const handleBackButtonClick = useCallback(
+      (event: React.MouseEvent<HTMLButtonElement>) => {
+        onPageChange(event, page - 1)
+      },
+      [onPageChange, page],
+    )
 
-    const handleNextButtonClick = (
-      event: React.MouseEvent<HTMLButtonElement>,
-    ) => {
-      onPageChange(event, page + 1)
-    }
+    const handleNextButtonClick = useCallback(
+      (event: React.MouseEvent<HTMLButtonElement>) => {
+        onPageChange(event, page + 1)
+      },
+      [onPageChange, page],
+    )
 
-    const handleLastPageButtonClick = (
-      event: React.MouseEvent<HTMLButtonElement>,
-    ) => {
-      onPageChange(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1))
-    }
+    const handleLastPageButtonClick = useCallback(
+      (event: React.MouseEvent<HTMLButtonElement>) => {
+        onPageChange(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1))
+      },
+      [count, onPageChange, rowsPerPage],
+    )
 
     return (
       <Box sx={{ flexShrink: 0, ml: 2.5 }}>

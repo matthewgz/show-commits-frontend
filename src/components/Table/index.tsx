@@ -1,4 +1,4 @@
-import { Children, useState } from 'react'
+import { Children, useState, useCallback, memo } from 'react'
 
 import {
   Table as MuiTable,
@@ -21,23 +21,29 @@ interface Props {
   commits: Commit[]
 }
 
-const Table = ({ commits }: Props) => {
+const Table = memo(({ commits }: Props) => {
   const [limit, setLimit] = useState(DEFAULT_LIMIT)
   const [page, setPage] = useState(DEFAULT_PAGE)
 
-  const handleChangePage = (
-    _: React.MouseEvent<HTMLButtonElement> | null,
-    newPage: number,
-  ) => {
-    setPage(newPage + 1)
-  }
+  const handleChangePage = useCallback(
+    (_: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
+      setPage(newPage + 1)
+    },
+    [],
+  )
 
-  const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
-    setLimit(parseInt(event.target.value, 10))
-    setPage(1)
-  }
+  const handleChangeRowsPerPage = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      setLimit(parseInt(event.target.value, 10))
+      setPage(1)
+    },
+    [],
+  )
+
+  const renderRow = useCallback(
+    (commit: Commit) => <Row key={commit.sha} row={commit} />,
+    [],
+  )
 
   return (
     <TableContainer
@@ -57,7 +63,7 @@ const Table = ({ commits }: Props) => {
             (limit > 0
               ? commits.slice((page - 1) * limit, (page - 1) * limit + limit)
               : commits
-            ).map((repo) => <Row key={repo.sha} row={repo} />),
+            ).map(renderRow),
           )}
         </TableBody>
         <TableFooter>
@@ -83,6 +89,8 @@ const Table = ({ commits }: Props) => {
       </MuiTable>
     </TableContainer>
   )
-}
+})
+
+Table.displayName = 'Table'
 
 export default Table

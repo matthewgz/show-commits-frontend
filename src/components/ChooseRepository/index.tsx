@@ -1,6 +1,7 @@
 import { useCallback, Children, Dispatch, SetStateAction, memo } from 'react'
 
 import { ToggleButtonGroup, ToggleButton, Box, Button } from '@mui/material'
+
 import { Repository } from 'utils/types'
 
 interface Props {
@@ -19,7 +20,7 @@ const ChooseRepository = memo(({ repositories, value, setValue }: Props) => {
 
   const renderToogleButton = useCallback(
     (repository: Repository) => (
-      <ToggleButton value={repository.name}>{repository.name}</ToggleButton>
+      <ToggleButton value={repository.name}>{repository.label}</ToggleButton>
     ),
     [],
   )
