@@ -20,6 +20,10 @@ export default function MyApp(props: MyAppProps) {
     <CacheProvider value={emotionCache}>
       <Head>
         <title>Show Commits</title>
+        <meta
+          name="viewport"
+          content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
+        />
         <meta name="description" content="Show commits related this project" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
