@@ -1,13 +1,12 @@
 import type { NextPage } from 'next'
 
-import { Button } from '@mui/material'
+import Header from 'components/Header'
 
 const Home: NextPage = () => {
   return (
     <div>
-      <main>
-        <Button variant="contained">Hello World</Button>
-      </main>
+      <Header />
+      <main></main>
       <footer></footer>
     </div>
   )
