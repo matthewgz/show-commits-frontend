@@ -74,8 +74,7 @@ export async function getServerSideProps() {
 
     if (!repositoriesData) {
       return {
-        repositories: [],
-        commits: [],
+        notFound: true,
       }
     }
 
@@ -84,6 +83,9 @@ export async function getServerSideProps() {
     }
   } catch (error) {
     console.error(error)
+    return {
+      notFound: true,
+    }
   }
 }
 
