@@ -1,7 +1,8 @@
 import { memo } from 'react'
 
-import { TableCell, TableRow, Button } from '@mui/material'
+import { TableCell, TableRow, Button, Link } from '@mui/material'
 
+import Avatar from 'components/Avatar'
 import { Commit } from 'utils/types'
 
 interface Props {
@@ -15,12 +16,19 @@ const Row = memo(({ row }: Props) => {
         {row.message}
       </TableCell>
       <TableCell style={{ width: 160 }} align="center">
-        {row.author.name}
+        <Avatar author={row.author} />
       </TableCell>
       <TableCell style={{ width: 160 }} align="center">
-        <Button variant="contained" color="primary">
-          View
-        </Button>
+        <Link
+          href={row.htmlUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          underline="none"
+        >
+          <Button variant="contained" color="primary">
+            View Code
+          </Button>
+        </Link>
       </TableCell>
     </TableRow>
   )

@@ -48,7 +48,7 @@ const Table = ({ commits }: Props) => {
         <TableHead>
           <TableRow>
             <TableCell align="center">Message</TableCell>
-            <TableCell align="center">author</TableCell>
+            <TableCell align="center">Author</TableCell>
             <TableCell align="center">Actions</TableCell>
           </TableRow>
         </TableHead>
