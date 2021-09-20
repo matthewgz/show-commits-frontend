@@ -43,3 +43,7 @@ Builds the app for production.
 `npm run start`
 
 Start the project with the files generated for production.
+
+`npm run test:watch`
+
+Launches the test runner in the interactive watch mode.
