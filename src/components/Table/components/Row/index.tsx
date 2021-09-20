@@ -26,7 +26,7 @@ const Row = memo(({ row }: Props) => {
           underline="none"
         >
           <Button variant="contained" color="primary">
-            View Code
+            View
           </Button>
         </Link>
       </TableCell>

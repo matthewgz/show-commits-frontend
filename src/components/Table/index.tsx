@@ -1,4 +1,4 @@
-import { Children, useState, useCallback, memo } from 'react'
+import { Children, Dispatch, SetStateAction, useCallback, memo } from 'react'
 
 import {
   Table as MuiTable,
@@ -13,23 +13,24 @@ import {
 } from '@mui/material'
 
 import { Commit } from 'utils/types'
-import { DEFAULT_LIMIT, DEFAULT_PAGE, ROWS_PER_PAGE } from 'utils/constants'
+import { ROWS_PER_PAGE } from 'utils/constants'
 import TablePaginationActions from './components/TablePaginationActions'
 import Row from './components/Row'
 
 interface Props {
   commits: Commit[]
+  setPage: Dispatch<SetStateAction<number>>
+  setLimit: Dispatch<SetStateAction<number>>
+  page: number
+  limit: number
 }
 
-const Table = memo(({ commits }: Props) => {
-  const [limit, setLimit] = useState(DEFAULT_LIMIT)
-  const [page, setPage] = useState(DEFAULT_PAGE)
-
+const Table = memo(({ commits, setPage, setLimit, page, limit }: Props) => {
   const handleChangePage = useCallback(
     (_: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
       setPage(newPage + 1)
     },
-    [],
+    [setPage],
   )
 
   const handleChangeRowsPerPage = useCallback(
@@ -37,7 +38,7 @@ const Table = memo(({ commits }: Props) => {
       setLimit(parseInt(event.target.value, 10))
       setPage(1)
     },
-    [],
+    [setLimit, setPage],
   )
 
   const renderRow = useCallback(
@@ -48,7 +49,11 @@ const Table = memo(({ commits }: Props) => {
   return (
     <TableContainer
       component={Paper}
-      sx={{ maxWidth: 1000, marginInline: 'auto', marginTop: 4 }}
+      sx={{
+        maxWidth: 1000,
+        marginInline: 'auto',
+        marginY: 4,
+      }}
     >
       <MuiTable aria-label="collapsible table">
         <TableHead>

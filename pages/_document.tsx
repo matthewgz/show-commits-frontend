@@ -24,7 +24,7 @@ export default class MyDocument extends Document {
             href="https://fonts.googleapis.com/icon?family=Material+Icons"
           />
         </Head>
-        <body>
+        <body style={{ backgroundColor: '#e1f0fd' }}>
           <Main />
           <NextScript />
         </body>
@@ -42,14 +42,8 @@ MyDocument.getInitialProps = async (ctx) => {
   ctx.renderPage = () =>
     originalRenderPage({
       // eslint-disable-next-line react/display-name
-      enhanceApp: (App) => (props) =>
-        (
-          <App
-            /* tslint:disable */
-            emotionCache={cache}
-            {...props}
-          />
-        ),
+      enhanceApp: (App: any) => (props) =>
+        <App emotionCache={cache} {...props} />,
     })
 
   const initialProps = await Document.getInitialProps(ctx)
