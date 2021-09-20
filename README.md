@@ -1,34 +1,43 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Github API integration to show commits (Frontend)
 
-## Getting Started
+This project consumes the GitHub API to obtain the commits made in this project and that of the `show-commits-backend` repository.
 
-First, run the development server:
+To carry out this, the Next JS framework was used to be able to make SSR and Material UI for the design part.
+
+And to obtain the data, the API developed in the repository `show-commits-backend` is consumed
+
+## Installation
+
+1. For installation, you will first need to clone this project on your workstation.
+
+2. Once the project is cloned, you must enter the project using a terminal and execute the following command to complete the installation.
 
 ```bash
-npm run dev
-# or
-yarn dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Configuration
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+Before starting the project make sure the `.env.local` is correctly configured. Copy `.env.example` and consider these values:
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+```bash
+# Put the API URL of the show-commits-backend project
+NEXT_PUBLIC_ENV_BACKEND_API="http://localhost:8000/"
+```
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Available Scripts
 
-## Learn More
+In the project directory, you can run:
 
-To learn more about Next.js, take a look at the following resources:
+`npm run dev`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Runs the app in the development mode. Open http://localhost:3000 to view it in the browser.
+The project will reload if you make edits.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+`npm run build`
 
-## Deploy on Vercel
+Builds the app for production.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+`npm run start`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Start the project with the files generated for production.
